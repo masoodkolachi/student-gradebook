@@ -41,4 +41,53 @@ class RosterTest {
         gradebook g = studentWithScores(8, "R-EIGHT");
         assertThrows(IllegalArgumentException.class, () -> roster.addStudent(g));
     }
+
+    // --- Lab 6, Task 3: boundary tests around the min (1) and max (6) ---
+    // --- edges of the scores-per-student rule.                        ---
+
+    @Test
+    void testBoundary_zeroScores_throws() {
+        Roster roster = new Roster();
+        gradebook g = studentWithScores(0, "BVA-0");
+        assertThrows(IllegalArgumentException.class, () -> roster.addStudent(g));
+    }
+
+    @Test
+    void testBoundary_oneScore_accepted() {
+        Roster roster = new Roster();
+        gradebook g = studentWithScores(1, "BVA-1");
+        roster.addStudent(g);
+        assertEquals(1, roster.size());
+    }
+
+    @Test
+    void testBoundary_twoScores_accepted() {
+        Roster roster = new Roster();
+        gradebook g = studentWithScores(2, "BVA-2");
+        roster.addStudent(g);
+        assertEquals(1, roster.size());
+    }
+
+    @Test
+    void testBoundary_fiveScores_accepted() {
+        Roster roster = new Roster();
+        gradebook g = studentWithScores(5, "BVA-5");
+        roster.addStudent(g);
+        assertEquals(1, roster.size());
+    }
+
+    @Test
+    void testBoundary_sixScores_accepted() {
+        Roster roster = new Roster();
+        gradebook g = studentWithScores(6, "BVA-6");
+        roster.addStudent(g);
+        assertEquals(1, roster.size());
+    }
+
+    @Test
+    void testBoundary_sevenScores_throws() {
+        Roster roster = new Roster();
+        gradebook g = studentWithScores(7, "BVA-7");
+        assertThrows(IllegalArgumentException.class, () -> roster.addStudent(g));
+    }
 }

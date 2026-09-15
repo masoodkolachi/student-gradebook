@@ -38,4 +38,35 @@ class ValidateNameTest {
     void testNameWithHyphenAccepted() {
         assertDoesNotThrow(() -> gradebook.validateName("Anne-Marie"));
     }
+
+    // --- Lab 6, Task 4: boundary tests around the min (non-empty) and ---
+    // --- max (50 char) edges of the name-length rule.                 ---
+
+    @Test
+    void testBoundary_lengthZero_throws() {
+        assertThrows(IllegalArgumentException.class, () -> gradebook.validateName(""));
+    }
+
+    @Test
+    void testBoundary_lengthOne_accepted() {
+        assertDoesNotThrow(() -> gradebook.validateName("A"));
+    }
+
+    @Test
+    void testBoundary_length49_accepted() {
+        String name = "A".repeat(49);
+        assertDoesNotThrow(() -> gradebook.validateName(name));
+    }
+
+    @Test
+    void testBoundary_length50_accepted() {
+        String name = "A".repeat(50);
+        assertDoesNotThrow(() -> gradebook.validateName(name));
+    }
+
+    @Test
+    void testBoundary_length51_throws() {
+        String name = "A".repeat(51);
+        assertThrows(IllegalArgumentException.class, () -> gradebook.validateName(name));
+    }
 }
