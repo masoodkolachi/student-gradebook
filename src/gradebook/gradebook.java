@@ -57,6 +57,20 @@ public class gradebook {
     }
 
     /**
+     * @return this student's name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return this student's roll number
+     */
+    public String getRollNo() {
+        return rollNo;
+    }
+
+    /**
      * Maps a numeric score (0-100) to a letter grade.
      * Equivalence classes: Invalid-low (&lt;0), F [0-59], D [60-69],
      * C [70-79], B [80-89], A [90-100], Invalid-high (&gt;100).
