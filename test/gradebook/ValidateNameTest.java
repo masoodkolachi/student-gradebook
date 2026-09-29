@@ -1,17 +1,39 @@
 package gradebook;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Lab 5, Task 4 — EP tests for gradebook.validateName(name).
- * Classes covered: valid typical name, empty string, over-length string
- * (>50 chars), string containing digits/symbols. A hyphenated-name case
- * is included as a fifth class since hyphens are explicitly allowed.
+ * Lab 5 (EP) and Lab 6 (BVA) tests for gradebook.validateName(), refactored
+ * in Lab 7 Task 1 to build the long test names once in a shared fixture.
+ *
+ * Fixture scope note (module / class scope):
+ * JUnit has no "module" scope like pytest. @BeforeAll on a static method
+ * runs once for the whole test class, and since each class here lives in one
+ * file, that is the closest match to pytest's scope="module". Use it for
+ * setup that is slow or wasteful to repeat AND that no test will modify:
+ * a database connection, a loaded file, a big read-only dataset. Strings are
+ * immutable, so sharing them between tests is safe. (Building three short
+ * strings is not really "expensive" - it is here to show the pattern.)
+ * Anything a test can change belongs in a @BeforeEach fixture instead.
  */
 class ValidateNameTest {
+
+    private static String name49;
+    private static String name50;
+    private static String name51;
+
+    @BeforeAll
+    static void buildLongNames() {
+        name49 = "A".repeat(49);
+        name50 = "A".repeat(50);
+        name51 = "A".repeat(51);
+    }
+
+    // --- Lab 5, Task 4: EP tests ---
 
     @Test
     void testValidTypicalName() {
@@ -25,8 +47,7 @@ class ValidateNameTest {
 
     @Test
     void testOverLengthNameRejected() {
-        String longName = "A".repeat(51);
-        assertThrows(IllegalArgumentException.class, () -> gradebook.validateName(longName));
+        assertThrows(IllegalArgumentException.class, () -> gradebook.validateName(name51));
     }
 
     @Test
@@ -39,8 +60,7 @@ class ValidateNameTest {
         assertDoesNotThrow(() -> gradebook.validateName("Anne-Marie"));
     }
 
-    // --- Lab 6, Task 4: boundary tests around the min (non-empty) and ---
-    // --- max (50 char) edges of the name-length rule.                 ---
+    // --- Lab 6, Task 4: boundary tests around the min and max length ---
 
     @Test
     void testBoundary_lengthZero_throws() {
@@ -54,19 +74,16 @@ class ValidateNameTest {
 
     @Test
     void testBoundary_length49_accepted() {
-        String name = "A".repeat(49);
-        assertDoesNotThrow(() -> gradebook.validateName(name));
+        assertDoesNotThrow(() -> gradebook.validateName(name49));
     }
 
     @Test
     void testBoundary_length50_accepted() {
-        String name = "A".repeat(50);
-        assertDoesNotThrow(() -> gradebook.validateName(name));
+        assertDoesNotThrow(() -> gradebook.validateName(name50));
     }
 
     @Test
     void testBoundary_length51_throws() {
-        String name = "A".repeat(51);
-        assertThrows(IllegalArgumentException.class, () -> gradebook.validateName(name));
+        assertThrows(IllegalArgumentException.class, () -> gradebook.validateName(name51));
     }
 }
