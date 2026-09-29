@@ -31,4 +31,21 @@ public class Roster {
     public int size() {
         return students.size();
     }
+
+    /**
+     * Average of all students' averages (each student counts once, no
+     * matter how many scores they have).
+     *
+     * @return the class average, or 0.0 if the roster is empty
+     */
+    public double classAverage() {
+        if (students.isEmpty()) {
+            return 0.0;
+        }
+        double sum = 0.0;
+        for (gradebook s : students) {
+            sum += s.average();
+        }
+        return sum / students.size();
+    }
 }
