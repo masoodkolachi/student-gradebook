@@ -60,4 +60,13 @@ class RankStudentsTest {
         roster.addStudent(ali);
         assertEquals(List.of(ali, zara), Ranking.rankStudents(roster));
     }
+
+    @Test
+    void testRankStudents_namesDifferingInCase_orderedIgnoringCase() {
+        gradebook bilal = student("Bilal", 80);
+        gradebook ali = student("ali", 80);
+        roster.addStudent(bilal);
+        roster.addStudent(ali);
+        assertEquals(List.of(ali, bilal), Ranking.rankStudents(roster));
+    }
 }
