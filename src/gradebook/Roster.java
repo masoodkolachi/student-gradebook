@@ -56,6 +56,13 @@ public class Roster {
         return students.size();
     }
 
+        /**
+     * @return a read-only copy of the students currently on the roster
+     */
+    public List<gradebook> getStudents() {
+        return List.copyOf(students);
+    }
+
     /**
      * Average of all students' averages (each student counts once, no
      * matter how many scores they have).
