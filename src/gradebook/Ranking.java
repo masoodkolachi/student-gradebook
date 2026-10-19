@@ -8,7 +8,7 @@ public class Ranking {
 
     private static final Comparator<gradebook> BY_AVERAGE_DESC_THEN_NAME =
             Comparator.comparingDouble(gradebook::average).reversed()
-                    .thenComparing(gradebook::getName);
+                    .thenComparing(gradebook::getName, String.CASE_INSENSITIVE_ORDER);
 
     public static List<gradebook> rankStudents(Roster roster) {
         List<gradebook> ranked = new ArrayList<>(roster.getStudents());
