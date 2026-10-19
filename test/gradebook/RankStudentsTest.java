@@ -51,4 +51,13 @@ class RankStudentsTest {
         roster.addStudent(mid);
         assertEquals(List.of(high, mid, low), Ranking.rankStudents(roster));
     }
+
+    @Test
+    void testRankStudents_equalAverages_brokenAlphabeticallyByName() {
+        gradebook zara = student("Zara", 80);
+        gradebook ali = student("Ali", 80);
+        roster.addStudent(zara);
+        roster.addStudent(ali);
+        assertEquals(List.of(ali, zara), Ranking.rankStudents(roster));
+    }
 }
