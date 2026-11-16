@@ -43,3 +43,9 @@ exact line and say what you would change.
 2. Go through the diff once per category, not once overall. You catch more that way.
 3. Comment on the line, say what is wrong and why, and suggest a fix. Use a suggestion block when the fix is a single line.
 4. Submit the review as Approve, Comment or Request changes, with a short summary at the top.
+
+## Lessons learned
+
+The checklist item that caught the most valuable issue was "Are comparisons and arithmetic right at the boundaries". It found that percentile divided by n instead of n - 1, so the top student could never reach 100 and a one-student roster returned 0. The tests would not have caught it because none existed for those cases.
+
+One item I would add for next time: "Does any lookup (such as indexOf) handle the not-found case?" The first version returned a wrong number when the student was not on the roster.
