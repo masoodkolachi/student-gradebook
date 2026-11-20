@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Ranking {
 
+    private Ranking() {
+    }
+
     private static final Comparator<gradebook> BY_AVERAGE_DESC_THEN_NAME =
             Comparator.comparingDouble(gradebook::average).reversed()
                     .thenComparing(gradebook::getName, String.CASE_INSENSITIVE_ORDER);
