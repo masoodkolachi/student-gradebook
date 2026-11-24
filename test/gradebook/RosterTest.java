@@ -49,6 +49,7 @@ class RosterTest {
     void testRejectsStudentWithZeroScores() {
         gradebook g = studentWithScores(0);
         assertThrows(IllegalArgumentException.class, () -> roster.addStudent(g));
+        assertEquals(0, roster.size());
     }
 
     @Test

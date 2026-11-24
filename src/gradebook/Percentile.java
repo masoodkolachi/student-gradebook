@@ -4,6 +4,9 @@ import java.util.List;
 
 public class Percentile {
 
+    private Percentile() {
+    }
+
     private static final double FULL_PERCENT = 100.0;
 
     /**
