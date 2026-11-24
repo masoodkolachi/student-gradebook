@@ -37,7 +37,7 @@ class StudentTest {
             System.setOut(original);
         }
         String output = captured.toString();
-        assertTrue(output.contains("Ali Average: 83.6"));
+        assertTrue(output.contains("zunair Average: 83.6"));
         assertTrue(output.contains("Mariam Average: 84.0"));
         assertTrue(output.contains("Overall Average:"));
     }
